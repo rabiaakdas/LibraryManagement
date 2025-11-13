@@ -20,7 +20,4 @@ Bu proje, kütüphane sisteminde **kitap yönetimi, kullanıcı işlemleri ve ö
 - 🗄️ Entity Framework Core ile veritabanı yönetimi
 - 🎨 Bootstrap tabanlı responsive arayüz
 
-## ⚙️ Kurulum
-1. Depoyu klonlayın:
-   ```bash
-   git clone https://github.com/<kullanıcı-adın>/<repo-adı>.git
+
