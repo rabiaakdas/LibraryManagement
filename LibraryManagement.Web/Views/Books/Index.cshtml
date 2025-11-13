@@ -1,0 +1,33 @@
+﻿@model HomePageViewModel
+
+@section header
+{
+    @await Html.PartialAsync("_header")
+}
+
+@section menu
+{
+    @await Component.InvokeAsync("Genres")
+}
+
+<h1>Kitap listesi</h1>
+
+<div class="book-list">
+    @if (Model.PopularBooks?.Any() == true)
+    {
+        @foreach (var book in Model.PopularBooks)
+        {
+            @await Html.PartialAsync("_book", book)
+        }
+    }
+    else
+    {
+        <p>Henüz kitap eklenmemiş.</p>
+    }
+</div>
+
+
+
+}
+
+}

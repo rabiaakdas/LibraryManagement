@@ -1,0 +1,229 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\LibraryManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\controllers\\profilescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\controllers\\profilescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\migrations\\20250925153503_stockadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\migrations\\20250925153503_stockadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\data\\dataseeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\data\\dataseeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\data\\bookcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\data\\bookcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\entity\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\entity\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\views\\profiles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\views\\profiles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\entity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\entity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\models\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\models\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\views\\profiles\\createaddress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\views\\profiles\\createaddress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|c:\\users\\librarymanagement\\librarymanagement.web\\views\\profiles\\address.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5E43BD6-CC75-4FAA-BA9E-8B06801620B4}|LibraryManagement.Web\\LibraryManagement.Web.csproj|solutionrelative:librarymanagement.web\\views\\profiles\\address.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 12,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T15:52:05.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BooksController.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\BooksController.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Controllers\\BooksController.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\BooksController.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Controllers\\BooksController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T15:52:04.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20250925153503_StockAdd.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Migrations\\20250925153503_StockAdd.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Migrations\\20250925153503_StockAdd.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Migrations\\20250925153503_StockAdd.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Migrations\\20250925153503_StockAdd.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA1wB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T15:35:05.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DataSeeding.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Data\\DataSeeding.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Data\\DataSeeding.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Data\\DataSeeding.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Data\\DataSeeding.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAAB0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T15:30:40.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BookContext.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Data\\BookContext.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Data\\BookContext.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Data\\BookContext.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Data\\BookContext.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T15:30:37.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Book.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Entity\\Book.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Entity\\Book.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Entity\\Book.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Entity\\Book.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T15:28:52.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Views\\Profiles\\Index.cshtml",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Views\\Profiles\\Index.cshtml",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Views\\Profiles\\Index.cshtml",
+              "RelativeToolTip": "LibraryManagement.Web\\Views\\Profiles\\Index.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAUwG8AAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-25T11:02:57.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Entity\\User.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Entity\\User.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Entity\\User.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Entity\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T10:54:44.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ChangePasswordViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Models\\ChangePasswordViewModel.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Models\\ChangePasswordViewModel.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Models\\ChangePasswordViewModel.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Models\\ChangePasswordViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T10:52:17.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\CartController.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAADwv04AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T12:20:44.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateAddress.cshtml",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Views\\Profiles\\CreateAddress.cshtml",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Views\\Profiles\\CreateAddress.cshtml",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Views\\Profiles\\CreateAddress.cshtml",
+              "RelativeToolTip": "LibraryManagement.Web\\Views\\Profiles\\CreateAddress.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-24T12:48:55.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Address.cshtml",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Views\\Profiles\\Address.cshtml",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Views\\Profiles\\Address.cshtml",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Views\\Profiles\\Address.cshtml",
+              "RelativeToolTip": "LibraryManagement.Web\\Views\\Profiles\\Address.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-24T12:48:51.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProfilesController.cs",
+              "DocumentMoniker": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\ProfilesController.cs",
+              "RelativeDocumentMoniker": "LibraryManagement.Web\\Controllers\\ProfilesController.cs",
+              "ToolTip": "C:\\Users\\LibraryManagement\\LibraryManagement.Web\\Controllers\\ProfilesController.cs",
+              "RelativeToolTip": "LibraryManagement.Web\\Controllers\\ProfilesController.cs",
+              "ViewState": "AgIAANkAAAAAAAAAAAAUwL8AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-24T12:08:02.59Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

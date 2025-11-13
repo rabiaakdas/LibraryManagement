@@ -1,0 +1,81 @@
+﻿@model List<LibraryManagement.Web.Models.CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Sepetim";
+    decimal grandTotal = Model.Sum(x => x.TotalPrice);
+}
+
+<h2>Sepetim</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (!Model.Any())
+{
+    <p>Sepetiniz boş.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Kitap</th>
+                <th>Fiyat</th>
+                <th>Adet</th>
+                <th>Toplam</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="/img/@item.ImageUrl" alt="@item.Title" style="width:50px;height:70px;object-fit:cover;" />
+                        @item.Title
+                    </td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>
+                        <form asp-action="UpdateQuantity" method="post" style="display:inline-block;">
+                            <input type="hidden" name="bookId" value="@item.BookId" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" style="width:60px;" />
+                            <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+                        </form>
+                    </td>
+                    <td>@item.TotalPrice.ToString("C")</td>
+                    <td>
+                        <form asp-action="Remove" method="post" style="display:inline-block;">
+                            <input type="hidden" name="bookId" value="@item.BookId" />
+                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Toplam:</strong></td>
+                <td colspan="2"><strong>@grandTotal.ToString("C")</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form asp-action="Checkout" method="post">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <input type="hidden" name="cart[@i].BookId" value="@Model[i].BookId" />
+            <input type="hidden" name="cart[@i].Title" value="@Model[i].Title" />
+            <input type="hidden" name="cart[@i].ImageUrl" value="@Model[i].ImageUrl" />
+            <input type="hidden" name="cart[@i].Price" value="@Model[i].Price" />
+            <input type="hidden" name="cart[@i].Quantity" value="@Model[i].Quantity" />
+        }
+        <button type="submit" class="btn btn-success">Ödeme Yap</button>
+    </form>
+}

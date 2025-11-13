@@ -1,0 +1,43 @@
+﻿@model List<OrderViewModel>
+
+<h2>Siparişlerim</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Henüz hiç sipariş vermediniz.</div>
+}
+else
+{
+    @foreach (var order in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Sipariş #@order.Id</strong> - @order.OrderDate.ToString("dd.MM.yyyy HH:mm")
+                <span class="float-end">Toplam: @order.TotalAmount.ToString("C")</span>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Kitap</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.Items)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@item.TotalPrice.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}

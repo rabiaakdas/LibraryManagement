@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LibraryManagement.Web.Entity.Favorite>
+
+<h2>Favorilerim</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Henüz favori kitap eklemediniz.</div>
+}
+else
+{
+    <div class="row">
+        @foreach (var fav in Model)
+        {
+            <div class="col-12 mb-3">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="/img/@fav.Book.ImageUrl" class="img-fluid rounded-start"
+                                 alt="@fav.Book.Title" style="height:150px; object-fit:cover;" />
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title">@fav.Book.Title</h5>
+                                <a asp-controller="Books" asp-action="Details" asp-route-id="@fav.Book.BookId"
+                                   class="btn btn-outline-info btn-sm">Detaylar</a>
+                                <form asp-controller="Cart" asp-action="UpdateQuantity" method="post" style="display:inline;">
+                                    <input type="hidden" name="BookId" value="@fav.Book.BookId" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <button type="submit" class="btn btn-outline-secondary">Sepete Ekle</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
