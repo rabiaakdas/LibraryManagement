@@ -1,0 +1,85 @@
+.book-card {
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.12);
+}
+
+.book-image-container {
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f8f9fa;
+    padding: 14px;
+}
+
+.book-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover .book-card-image {
+    transform: scale(1.03);
+}
+
+.book-card-body {
+    min-height: 250px;
+}
+
+.book-card-title {
+    min-height: 3rem;
+}
+
+.book-card-meta {
+    min-height: 1.5rem;
+}
+
+.book-card-genres {
+    min-height: 1.5rem;
+}
+
+.book-card-actions {
+    min-height: 2rem;
+}
+
+.book-list-image-container {
+    width: 150px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f8f9fa;
+    padding: 8px;
+}
+
+.book-list-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.book-list-image-container:hover .book-list-card-image {
+    transform: scale(1.03);
+}
+
+@media (max-width: 576px) {
+    .book-image-container {
+        height: 280px;
+        padding: 12px;
+    }
+
+    .book-card-body {
+        min-height: auto;
+    }
+}

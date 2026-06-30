@@ -1,0 +1,16 @@
+.git/
+.vs/
+**/bin/
+**/obj/
+**/Logs/
+**/TestResults/
+build-check/
+BuildCheck/
+temp-build/
+temp_build/
+artifacts/
+*.user
+*.rsuser
+*.suo
+*.log
+LibraryManagement.Web/appsettings.Development.json

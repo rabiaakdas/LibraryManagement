@@ -1,0 +1,16 @@
+@model AdminGenreFormViewModel
+
+@{
+    ViewData["Title"] = "Yeni Kategori";
+}
+
+<h2 class="mb-4">Yeni Kategori</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_GenreForm" model="Model" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

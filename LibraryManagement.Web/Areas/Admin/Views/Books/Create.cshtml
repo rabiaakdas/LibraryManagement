@@ -1,0 +1,16 @@
+@model AdminBookFormViewModel
+
+@{
+    ViewData["Title"] = "Yeni Kitap";
+}
+
+<h2 class="mb-4">Yeni Kitap</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_BookForm" model="Model" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

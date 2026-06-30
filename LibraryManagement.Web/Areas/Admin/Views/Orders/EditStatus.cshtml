@@ -1,0 +1,65 @@
+@model AdminOrderStatusViewModel
+
+@{
+    ViewData["Title"] = "Sipariş Durumu Güncelle";
+}
+
+<h2 class="mb-4">Sipariş Durumu Güncelle</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Sipariş Id</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Kullanıcı</dt>
+            <dd class="col-sm-9">@Model.UserId</dd>
+
+            <dt class="col-sm-3">Sipariş Tarihi</dt>
+            <dd class="col-sm-9">@Model.OrderDate.ToString("dd.MM.yyyy HH:mm")</dd>
+
+            <dt class="col-sm-3">Toplam Tutar</dt>
+            <dd class="col-sm-9">@Model.TotalAmount.ToString("C")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="EditStatus" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="OrderDate" />
+    <input type="hidden" asp-for="TotalAmount" />
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Sipariş Durumu</label>
+        <select asp-for="Status" class="form-select">
+            @foreach (var status in Model.StatusOptions)
+            {
+                <option value="@status">@status</option>
+            }
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CargoCompany" class="form-label">Kargo Şirketi</label>
+        <input asp-for="CargoCompany" class="form-control" placeholder="Örn: Yurtiçi Kargo" />
+        <span asp-validation-for="CargoCompany" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TrackingNumber" class="form-label">Takip Numarası</label>
+        <input asp-for="TrackingNumber" class="form-control" placeholder="Takip numarası" />
+        <span asp-validation-for="TrackingNumber" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

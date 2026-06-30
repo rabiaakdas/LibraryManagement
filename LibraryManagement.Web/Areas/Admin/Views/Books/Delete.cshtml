@@ -1,0 +1,40 @@
+@model LibraryManagement.Web.Entity.Book
+
+@{
+    ViewData["Title"] = "Kitap Sil";
+}
+
+<h2 class="mb-4">Kitap Sil</h2>
+
+<div class="alert alert-warning">
+    <strong>@Model.Title</strong> kitabini silmek istediginize emin misiniz?
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.BookId</dd>
+
+            <dt class="col-sm-3">Yazar</dt>
+            <dd class="col-sm-9">@Model.Author</dd>
+
+            <dt class="col-sm-3">Fiyat</dt>
+            <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+
+            <dt class="col-sm-3">Stok</dt>
+            <dd class="col-sm-9">@Model.Stock</dd>
+
+            <dt class="col-sm-3">Kategoriler</dt>
+            <dd class="col-sm-9">
+                @(Model.Genres.Any() ? string.Join(", ", Model.Genres.Select(g => g.Name)) : "Kategori yok")
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.BookId" method="post" class="d-flex gap-2">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Evet, Sil</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+</form>

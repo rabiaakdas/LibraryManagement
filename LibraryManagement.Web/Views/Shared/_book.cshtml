@@ -1,0 +1,40 @@
+@model LibraryManagement.Web.Entity.Book
+
+<div class="card mb-3 h-100 book-card">
+    <div class="row g-0 h-100">
+        <div class="col-md-3 d-flex justify-content-center align-items-start p-3">
+            @{
+                var imageUrl = string.IsNullOrWhiteSpace(Model.ImageUrl) ? "default-book.svg" : Model.ImageUrl;
+            }
+            <div class="book-list-image-container">
+                <img src="/img/@imageUrl" alt="@Model.Title" class="book-list-card-image" onerror="this.onerror=null;this.src='/img/default-book.svg';" />
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card-body d-flex flex-column h-100">
+                <h5 class="card-title">@Model.Title</h5>
+                <div class="mb-3">
+                    <span class="badge @(Model.Stock <= 0 ? "bg-danger" : Model.Stock <= 5 ? "bg-warning text-dark" : "bg-success")">
+                        @(Model.Stock <= 0 ? "Stokta Yok" : Model.Stock <= 5 ? $"Düşük Stok: {Model.Stock}" : $"Stok: {Model.Stock}")
+                    </span>
+                </div>
+
+                <div class="mt-auto d-flex gap-2 align-items-center flex-wrap">
+                    <a class="btn btn-outline-info" asp-controller="Books" asp-action="Details" asp-route-id="@Model.BookId">Detaylar</a>
+
+                    <form asp-controller="Cart" asp-action="UpdateQuantity" method="post" class="d-inline">
+                        <input type="hidden" name="BookId" value="@Model.BookId" />
+                        <input type="hidden" name="quantity" value="1" />
+                        <button type="submit" class="btn btn-outline-secondary" disabled="@(Model.Stock <= 0)">
+                            @(Model.Stock <= 0 ? "Stokta Yok" : "Sepete Ekle")
+                        </button>
+                    </form>
+
+                    <button type="button" class="btn btn-link p-0 add-to-favorites" data-id="@Model.BookId">
+                        <i class="bi bi-heart text-danger fs-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

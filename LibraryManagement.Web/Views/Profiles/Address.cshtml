@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LibraryManagement.Web.Models.AddressViewModel>
+
+@{
+    ViewData["Title"] = "Adreslerim";
+}
+
+<h2>Adreslerim</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="mb-3">
+    <a asp-action="CreateAddress" asp-controller="Profiles" class="btn btn-primary">Yeni Adres Ekle</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Adres Başlığı</th>
+            <th>İl</th>
+            <th>İlçe</th>
+            <th>Posta Kodu</th>
+            <th>Detay</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var adres in Model)
+            {
+                <tr>
+                    <td>@adres.Title</td>
+                    <td>@adres.City</td>
+                    <td>@adres.District</td>
+                    <td>@adres.ZipCode</td>
+                    <td>@adres.FullAddress</td>
+                    <td>
+                        <a asp-action="EditAddress" asp-route-id="@adres.Id" class="btn btn-sm btn-warning">Düzenle</a>
+                        <a asp-action="DeleteAddress" asp-route-id="@adres.Id" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Bu adresi silmek istediğinize emin misiniz?');">Sil</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Henüz adres eklenmedi.</td>
+            </tr>
+        }
+    </tbody>
+</table>

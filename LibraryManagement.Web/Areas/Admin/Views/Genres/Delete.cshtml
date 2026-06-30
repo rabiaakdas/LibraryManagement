@@ -1,0 +1,41 @@
+@model LibraryManagement.Web.Entity.Genre
+
+@{
+    ViewData["Title"] = "Kategori Sil";
+}
+
+<h2 class="mb-4">Kategori Sil</h2>
+
+@if (Model.Books.Any())
+{
+    <div class="alert alert-danger">
+        Bu kategoriye bağlı kitaplar olduğu için silinemez.
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">
+        <strong>@Model.Name</strong> kategorisini silmek istediginize emin misiniz?
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.GenreId</dd>
+
+            <dt class="col-sm-3">Kategori Adı</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Kitap Sayisi</dt>
+            <dd class="col-sm-9">@Model.Books.Count</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.GenreId" method="post" class="d-flex gap-2">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger" disabled="@Model.Books.Any()">Evet, Sil</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+</form>

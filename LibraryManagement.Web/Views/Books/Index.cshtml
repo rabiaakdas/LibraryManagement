@@ -1,0 +1,182 @@
+@model BookFilterViewModel
+
+@{
+    ViewData["Title"] = "Kitaplar";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="h3 mb-1">Kitaplar</h1>
+        <p class="text-muted mb-0">@Model.TotalItems kitap listeleniyor.</p>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-controller="Books" asp-action="Index" method="get">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Search" class="form-label">Kitap veya Yazar Ara</label>
+                    <input asp-for="Search" class="form-control" placeholder="Kitap adı veya yazar" />
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="CategoryId" class="form-label">Kategori</label>
+                    <select asp-for="CategoryId" class="form-select">
+                        <option value="">Tümü</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.GenreId">@category.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="MinPrice" class="form-label">Minimum Fiyat</label>
+                    <input asp-for="MinPrice" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="MaxPrice" class="form-label">Maksimum Fiyat</label>
+                    <input asp-for="MaxPrice" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Sort" class="form-label">Sıralama</label>
+                    <select asp-for="Sort" class="form-select">
+                        <option value="name_asc">Ada göre (A-Z)</option>
+                        <option value="name_desc">Ada göre (Z-A)</option>
+                        <option value="author_asc">Yazar adına göre (A-Z)</option>
+                        <option value="price_asc">Fiyat artan</option>
+                        <option value="price_desc">Fiyat azalan</option>
+                        <option value="newest">En yeni eklenen</option>
+                        <option value="stock_desc">En çok stokta olan</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check mb-2">
+                        <input asp-for="InStockOnly" class="form-check-input" />
+                        <label asp-for="InStockOnly" class="form-check-label">Sadece stokta olanları göster</label>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-end justify-content-md-end gap-2">
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                    <a asp-controller="Books" asp-action="Index" class="btn btn-outline-secondary">Temizle</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Books.Any())
+{
+    <div class="row g-4">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-sm-6 col-lg-4">
+                <div class="card h-100 book-card">
+                    @{
+                        var imageUrl = string.IsNullOrWhiteSpace(book.ImageUrl) ? "default-book.svg" : book.ImageUrl;
+                    }
+                    <div class="book-image-container">
+                        <img src="/img/@imageUrl" class="card-img-top book-card-image" alt="@book.Title" onerror="this.onerror=null;this.src='/img/default-book.svg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column book-card-body">
+                        <h5 class="card-title book-card-title">@book.Title</h5>
+                        <p class="text-muted mb-2 book-card-meta">@book.Author</p>
+                        @{
+                            var hasReviewSummary = Model.ReviewSummaries.TryGetValue(book.BookId, out var reviewSummary);
+                        }
+                        <div class="small mb-2">
+                            <span class="text-warning">
+                                @for (var i = 1; i <= 5; i++)
+                                {
+                                    <span>@(hasReviewSummary && i <= Math.Round(reviewSummary.AverageRating) ? "★" : "☆")</span>
+                                }
+                            </span>
+                            <span class="text-muted">
+                                @(hasReviewSummary ? reviewSummary.AverageRating.ToString("0.0") : "0.0")
+                                (@(hasReviewSummary ? reviewSummary.ReviewCount : 0) yorum)
+                            </span>
+                        </div>
+                        <div class="mb-2 book-card-genres">
+                            @if (book.Genres.Any())
+                            {
+                                <span class="small text-muted">@string.Join(", ", book.Genres.Select(g => g.Name))</span>
+                            }
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <strong>@book.Price.ToString("C")</strong>
+                            <span class="badge @(book.Stock <= 0 ? "bg-danger" : book.Stock <= 5 ? "bg-warning text-dark" : "bg-success")">
+                                @(book.Stock <= 0 ? "Stokta Yok" : book.Stock <= 5 ? $"Düşük Stok: {book.Stock}" : $"Stok: {book.Stock}")
+                            </span>
+                        </div>
+                        @if (book.Stock <= 0)
+                        {
+                            <div class="text-danger small mb-2">Bu kitap şu anda stokta yok.</div>
+                        }
+                        <div class="mt-auto d-flex gap-2 align-items-center flex-wrap book-card-actions">
+                            <a class="btn btn-outline-info btn-sm" asp-controller="Books" asp-action="Details" asp-route-id="@book.BookId">Detaylar</a>
+                            <form asp-controller="Cart" asp-action="UpdateQuantity" method="post" class="d-inline">
+                                <input type="hidden" name="BookId" value="@book.BookId" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="btn btn-outline-secondary btn-sm" disabled="@(book.Stock <= 0)">
+                                    @(book.Stock <= 0 ? "Stokta Yok" : "Sepete Ekle")
+                                </button>
+                            </form>
+                            <button type="button" class="btn btn-link p-0 add-to-favorites" data-id="@book.BookId">
+                                <i class="bi bi-heart text-danger fs-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">Filtrelere uygun kitap bulunamadı.</div>
+}
+
+@if (Model.TotalPages > 1)
+{
+    <nav class="mt-4" aria-label="Kitap sayfaları">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-Search="@Model.Search"
+                   asp-route-CategoryId="@Model.CategoryId"
+                   asp-route-MinPrice="@Model.MinPrice"
+                   asp-route-MaxPrice="@Model.MaxPrice"
+                   asp-route-InStockOnly="@Model.InStockOnly"
+                   asp-route-Sort="@Model.Sort"
+                   asp-route-Page="@(Model.Page - 1)">Önceki</a>
+            </li>
+
+            @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+            {
+                <li class="page-item @(pageNumber == Model.Page ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-Search="@Model.Search"
+                       asp-route-CategoryId="@Model.CategoryId"
+                       asp-route-MinPrice="@Model.MinPrice"
+                       asp-route-MaxPrice="@Model.MaxPrice"
+                       asp-route-InStockOnly="@Model.InStockOnly"
+                       asp-route-Sort="@Model.Sort"
+                       asp-route-Page="@pageNumber">@pageNumber</a>
+                </li>
+            }
+
+            <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-Search="@Model.Search"
+                   asp-route-CategoryId="@Model.CategoryId"
+                   asp-route-MinPrice="@Model.MinPrice"
+                   asp-route-MaxPrice="@Model.MaxPrice"
+                   asp-route-InStockOnly="@Model.InStockOnly"
+                   asp-route-Sort="@Model.Sort"
+                   asp-route-Page="@(Model.Page + 1)">Sonraki</a>
+            </li>
+        </ul>
+    </nav>
+}

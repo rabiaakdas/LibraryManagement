@@ -1,0 +1,263 @@
+@model AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <h2 class="mb-1">Admin Panel</h2>
+        <p class="text-muted mb-0">LibraryManagement yönetim özeti</p>
+    </div>
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Siteye Dön</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-primary h-100">
+            <div class="card-body">
+                <div class="text-muted small">Toplam Kitap</div>
+                <div class="display-6 fw-semibold">@Model.TotalBooks</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-success h-100">
+            <div class="card-body">
+                <div class="text-muted small">Toplam Kullanıcı</div>
+                <div class="display-6 fw-semibold">@Model.TotalUsers</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-warning h-100">
+            <div class="card-body">
+                <div class="text-muted small">Toplam Sipariş</div>
+                <div class="display-6 fw-semibold">@Model.TotalOrders</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-info h-100">
+            <div class="card-body">
+                <div class="text-muted small">Toplam Kategori</div>
+                <div class="display-6 fw-semibold">@Model.TotalGenres</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-secondary h-100">
+            <div class="card-body">
+                <div class="text-muted small">Toplam Yorum</div>
+                <div class="display-6 fw-semibold">@Model.TotalReviews</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-success h-100">
+            <div class="card-body">
+                <div class="text-muted small">Toplam Gelir</div>
+                <div class="h2 fw-semibold mb-0">@Model.TotalRevenue.ToString("C")</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-warning h-100">
+            <div class="card-body">
+                <div class="text-muted small">Bekleyen Sipariş</div>
+                <div class="display-6 fw-semibold">@Model.PendingOrders</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-danger h-100">
+            <div class="card-body">
+                <div class="text-muted small">Stokta Olmayan Kitap</div>
+                <div class="display-6 fw-semibold">@Model.OutOfStockBooks</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-2">
+            <a asp-area="Admin" asp-controller="Books" asp-action="Index" class="btn btn-primary">Kitap Yönetimi</a>
+            <a asp-area="Admin" asp-controller="Genres" asp-action="Index" class="btn btn-outline-primary">Kategori Yönetimi</a>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="btn btn-outline-primary">Sipariş Yönetimi</a>
+            <a asp-area="Admin" asp-controller="Reviews" asp-action="Index" class="btn btn-outline-primary">Yorum Yönetimi</a>
+            <a asp-area="Admin" asp-controller="Coupons" asp-action="Index" class="btn btn-outline-primary">Kupon Yönetimi</a>
+            <a asp-area="Admin" asp-controller="Reports" asp-action="OrdersExcel" class="btn btn-outline-success">Sipariş Excel Raporu</a>
+            <a asp-area="Admin" asp-controller="Reports" asp-action="StockExcel" class="btn btn-outline-success">Stok Excel Raporu</a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header fw-semibold">Son 5 Sipariş</div>
+            <div class="card-body p-0">
+                @if (Model.LatestOrders.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Kullanıcı</th>
+                                    <th>Tarih</th>
+                                    <th>Tutar</th>
+                                    <th>Durum</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.LatestOrders)
+                                {
+                                    <tr>
+                                        <td>@order.Id</td>
+                                        <td>@order.UserId</td>
+                                        <td>@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                        <td>@order.TotalAmount.ToString("C")</td>
+                                        <td><span class="badge bg-secondary">@order.Status</span></td>
+                                        <td class="text-end">
+                                            <a asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-info">Detay</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-3 text-muted">Henüz sipariş bulunmuyor.</div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header fw-semibold">En Çok Satılan 5 Kitap</div>
+            <div class="card-body p-0">
+                @if (Model.BestSellingBooks.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Kitap</th>
+                                    <th>Adet</th>
+                                    <th>Gelir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var book in Model.BestSellingBooks)
+                                {
+                                    <tr>
+                                        <td>@book.Title</td>
+                                        <td>@book.TotalQuantity</td>
+                                        <td>@book.TotalRevenue.ToString("C")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-3 text-muted">Satış verisi bulunmuyor.</div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card h-100">
+            <div class="card-header fw-semibold">En Son Gelen 5 Yorum</div>
+            <div class="card-body p-0">
+                @if (Model.LatestReviews.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Kitap</th>
+                                    <th>Kullanıcı</th>
+                                    <th>Puan</th>
+                                    <th>Yorum</th>
+                                    <th>Tarih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var review in Model.LatestReviews)
+                                {
+                                    var shortComment = review.Comment.Length > 60
+                                        ? review.Comment.Substring(0, 60) + "..."
+                                        : review.Comment;
+
+                                    <tr>
+                                        <td>@review.BookTitle</td>
+                                        <td>@review.Username</td>
+                                        <td><span class="badge bg-warning text-dark">@review.Rating / 5</span></td>
+                                        <td>@shortComment</td>
+                                        <td>@review.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-3 text-muted">Henüz yorum bulunmuyor.</div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card h-100">
+            <div class="card-header fw-semibold">Düşük Stoklu Kitaplar</div>
+            <div class="card-body p-0">
+                @if (Model.LowStockBooks.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Kitap</th>
+                                    <th>Stok</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var book in Model.LowStockBooks)
+                                {
+                                    var stockText = book.Stock <= 0 ? "Stok Yok" : "Düşük Stok";
+                                    var stockClass = book.Stock <= 0 ? "bg-danger" : "bg-warning text-dark";
+                                    <tr>
+                                        <td>@book.Title</td>
+                                        <td>
+                                            <span class="badge @stockClass">@stockText</span>
+                                            <span class="text-muted small ms-1">(@book.Stock)</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <a asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="@book.BookId" class="btn btn-sm btn-outline-warning">Düzenle</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-3 text-muted">Düşük stoklu kitap bulunmuyor.</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

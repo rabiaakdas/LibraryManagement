@@ -1,0 +1,146 @@
+﻿@model LibraryManagement.Web.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profilim";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<style>
+    /* Profil Kartı */
+    .profile-card {
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+    .profile-image {
+        border: 4px solid #0d6efd;
+        padding: 3px;
+    }
+
+    /* Sol Menü */
+    .list-group-item i {
+        margin-right: 8px;
+    }
+
+    /* Kartlar */
+    .action-card {
+        border-radius: 15px;
+        color: #fff;
+        padding: 30px 20px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .action-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .action-card i {
+            font-size: 2.5rem;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+    /* Gradient renkler */
+    .bg-gradient-blue {
+        background: linear-gradient(135deg, #4e9af1, #0d6efd);
+    }
+
+    .bg-gradient-red {
+        background: linear-gradient(135deg, #f14e4e, #dc3545);
+    }
+
+    .bg-gradient-green {
+        background: linear-gradient(135deg, #4ef1a1, #20c997);
+    }
+
+    .bg-gradient-purple {
+        background: linear-gradient(135deg, #9b4ef1, #6f42c1);
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Sol Menü -->
+        <div class="col-md-3">
+            <div class="card profile-card text-center mb-4">
+                <img src="@(string.IsNullOrEmpty(Model.ProfileImageUrl) ? "/img/default-profile.png" : Model.ProfileImageUrl)"
+                     class="rounded-circle mb-3 profile-image" width="100" height="100" alt="Profil Foto">
+                <h5>@Model.FullName</h5>
+                <p class="text-muted small">@Model.Email</p>
+                <p class="text-muted">Hoşgeldin! Profilini buradan yönetebilirsin.</p>
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person"></i>Hesabım</a>
+                <a href="/Profiles/ChangePassword" class="list-group-item list-group-item-action"><i class="bi bi-card-text"></i>Şifre Değiştirme</a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-envelope"></i>Mesajlarım <span class="badge bg-success">@Model.MessageCount</span>
+                </a>
+                <a href="/Users/Logout" class="list-group-item list-group-item-action text-danger"><i class="bi bi-box-arrow-right"></i>Çıkış Yap</a>
+            </div>
+        </div>
+
+        <!-- Ana İçerik -->
+        <div class="col-md-9">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Sipariş Numarası">
+                        <button class="btn btn-primary">ARA</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a asp-controller="Cart" asp-action="MyOrders" class="text-decoration-none">
+                        <div class="action-card bg-gradient-blue text-center p-3">
+                            <i class="bi bi-cart4"></i>
+                            <h6>Siparişlerim</h6>
+                            <p class="small">Siparişlerini takip et ve geçmişi gör.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <a asp-controller="Profiles" asp-action="Favorite" class="text-decoration-none">
+                        <div class="action-card bg-gradient-red text-center p-3">
+                            <i class="bi bi-heart"></i>
+                            <h6>Favorilerim</h6>
+                            <p class="small">Beğendiğin kitapları burada bul.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <a asp-controller="Profiles" asp-action="Address" class="text-decoration-none">
+                        <div class="action-card bg-gradient-green text-center p-3">
+                            <i class="bi bi-geo-alt"></i>
+                            <h6>Adreslerim</h6>
+                            <p class="small">Teslimat adreslerini yönet.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+                
+            </div>
+        </div>
+    </div>
+</div>

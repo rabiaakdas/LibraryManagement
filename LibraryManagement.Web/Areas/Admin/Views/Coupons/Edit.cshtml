@@ -1,0 +1,22 @@
+@model LibraryManagement.Web.Entity.Coupon
+
+@{
+    ViewData["Title"] = "Kupon Düzenle";
+}
+
+<h2 class="mb-4">Kupon Düzenle</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedAt" />
+    <input type="hidden" asp-for="UsedCount" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <partial name="_Form" model="Model" />
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Listeye Dön</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

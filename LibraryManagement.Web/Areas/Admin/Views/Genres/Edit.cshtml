@@ -1,0 +1,16 @@
+@model AdminGenreFormViewModel
+
+@{
+    ViewData["Title"] = "Kategori Düzenle";
+}
+
+<h2 class="mb-4">Kategori Düzenle</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.GenreId" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_GenreForm" model="Model" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

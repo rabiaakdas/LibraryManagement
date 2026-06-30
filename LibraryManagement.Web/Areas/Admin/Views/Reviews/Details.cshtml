@@ -1,0 +1,46 @@
+@model LibraryManagement.Web.Entity.BookReview
+
+@{
+    ViewData["Title"] = "Yorum Detay";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Yorum Detay</h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">Listeye Dön</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Yorum Id</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Kitap</dt>
+            <dd class="col-sm-9">@Model.Book.Title - @Model.Book.Author</dd>
+
+            <dt class="col-sm-3">Kullanıcı</dt>
+            <dd class="col-sm-9">@Model.User.Username (@Model.User.Email)</dd>
+
+            <dt class="col-sm-3">Puan</dt>
+            <dd class="col-sm-9">
+                <span class="text-warning">
+                    @for (var i = 1; i <= 5; i++)
+                    {
+                        <span>@(i <= Model.Rating ? "★" : "☆")</span>
+                    }
+                </span>
+                <span class="text-muted">(@Model.Rating / 5)</span>
+            </dd>
+
+            <dt class="col-sm-3">Yorum</dt>
+            <dd class="col-sm-9">@Model.Comment</dd>
+
+            <dt class="col-sm-3">Tarih</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</dd>
+        </dl>
+    </div>
+    <div class="card-footer d-flex gap-2">
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Sil</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">Listeye Dön</a>
+    </div>
+</div>

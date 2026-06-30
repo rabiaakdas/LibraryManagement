@@ -1,0 +1,39 @@
+@model LibraryManagement.Web.Entity.Coupon
+
+<div class="mb-3">
+    <label asp-for="Code" class="form-label">Kupon Kodu</label>
+    <input asp-for="Code" class="form-control" />
+    <span asp-validation-for="Code" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="DiscountType" class="form-label">İndirim Türü</label>
+    <select asp-for="DiscountType" class="form-select">
+        <option value="Percentage">Percentage</option>
+        <option value="FixedAmount">FixedAmount</option>
+    </select>
+    <span asp-validation-for="DiscountType" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="DiscountValue" class="form-label">İndirim Değeri</label>
+    <input asp-for="DiscountValue" class="form-control" />
+    <span asp-validation-for="DiscountValue" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="MinimumOrderAmount" class="form-label">Minimum Sipariş Tutarı</label>
+    <input asp-for="MinimumOrderAmount" class="form-control" />
+    <span asp-validation-for="MinimumOrderAmount" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="ExpirationDate" class="form-label">Son Kullanma Tarihi</label>
+    <input asp-for="ExpirationDate" type="date" class="form-control" />
+    <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="UsageLimit" class="form-label">Kullanım Limiti</label>
+    <input asp-for="UsageLimit" class="form-control" />
+    <span asp-validation-for="UsageLimit" class="text-danger"></span>
+</div>
+<div class="form-check mb-3">
+    <input asp-for="IsActive" class="form-check-input" />
+    <label asp-for="IsActive" class="form-check-label">Aktif</label>
+</div>

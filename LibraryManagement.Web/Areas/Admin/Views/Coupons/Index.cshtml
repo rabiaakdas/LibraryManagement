@@ -1,0 +1,68 @@
+@model List<LibraryManagement.Web.Entity.Coupon>
+
+@{
+    ViewData["Title"] = "Kupon Yönetimi";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">Kupon Yönetimi</h2>
+        <p class="text-muted mb-0">İndirim kuponlarını listele, ekle ve düzenle.</p>
+    </div>
+    <a asp-action="Create" class="btn btn-primary">Yeni Kupon</a>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Kod</th>
+                <th>Tür</th>
+                <th>Değer</th>
+                <th>Minimum Tutar</th>
+                <th>Kullanım</th>
+                <th>Son Tarih</th>
+                <th>Durum</th>
+                <th class="text-end">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var coupon in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@coupon.Code</td>
+                        <td>@coupon.DiscountType</td>
+                        <td>@(coupon.DiscountType == "Percentage" ? $"%{coupon.DiscountValue}" : coupon.DiscountValue.ToString("C"))</td>
+                        <td>@coupon.MinimumOrderAmount.ToString("C")</td>
+                        <td>@coupon.UsedCount / @(coupon.UsageLimit?.ToString() ?? "Sınırsız")</td>
+                        <td>@(coupon.ExpirationDate?.ToString("dd.MM.yyyy") ?? "Yok")</td>
+                        <td><span class="badge @(coupon.IsActive ? "bg-success" : "bg-secondary")">@(coupon.IsActive ? "Aktif" : "Pasif")</span></td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@coupon.Id" class="btn btn-sm btn-outline-info">Detay</a>
+                            <a asp-action="Edit" asp-route-id="@coupon.Id" class="btn btn-sm btn-outline-warning">Düzenle</a>
+                            <form asp-action="Deactivate" asp-route-id="@coupon.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Pasifleştir</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="8" class="text-center text-muted">Henüz kupon yok.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

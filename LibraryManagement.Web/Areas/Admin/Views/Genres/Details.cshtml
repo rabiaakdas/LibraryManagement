@@ -1,0 +1,29 @@
+@model LibraryManagement.Web.Entity.Genre
+
+@{
+    ViewData["Title"] = "Kategori Detay";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Kategori Detay</h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">Listeye Dön</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.GenreId</dd>
+
+            <dt class="col-sm-3">Kategori Adı</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Kitap Sayisi</dt>
+            <dd class="col-sm-9">@Model.Books.Count</dd>
+        </dl>
+    </div>
+    <div class="card-footer d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.GenreId" class="btn btn-warning">Düzenle</a>
+        <a asp-action="Delete" asp-route-id="@Model.GenreId" class="btn btn-outline-danger">Sil</a>
+    </div>
+</div>

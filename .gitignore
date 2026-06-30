@@ -1,0 +1,48 @@
+# Build output
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Visual Studio
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test output
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+
+# Project temporary folders
+build-check/
+BuildCheck/
+temp-build/
+temp_build/
+artifacts/
+
+# ASP.NET Core user secrets and local settings
+secrets.json
+appsettings.Development.json
+
+# Logs
+*.log
+logs/
+Logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+

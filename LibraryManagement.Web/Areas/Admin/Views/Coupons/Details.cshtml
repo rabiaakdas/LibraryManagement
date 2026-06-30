@@ -1,0 +1,25 @@
+@model LibraryManagement.Web.Entity.Coupon
+
+@{
+    ViewData["Title"] = "Kupon Detayı";
+}
+
+<h2 class="mb-4">Kupon Detayı</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Kod</dt><dd class="col-sm-9">@Model.Code</dd>
+            <dt class="col-sm-3">Tür</dt><dd class="col-sm-9">@Model.DiscountType</dd>
+            <dt class="col-sm-3">Değer</dt><dd class="col-sm-9">@Model.DiscountValue</dd>
+            <dt class="col-sm-3">Minimum Tutar</dt><dd class="col-sm-9">@Model.MinimumOrderAmount.ToString("C")</dd>
+            <dt class="col-sm-3">Kullanım</dt><dd class="col-sm-9">@Model.UsedCount / @(Model.UsageLimit?.ToString() ?? "Sınırsız")</dd>
+            <dt class="col-sm-3">Son Tarih</dt><dd class="col-sm-9">@(Model.ExpirationDate?.ToString("dd.MM.yyyy") ?? "Yok")</dd>
+            <dt class="col-sm-3">Durum</dt><dd class="col-sm-9">@(Model.IsActive ? "Aktif" : "Pasif")</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Düzenle</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">Listeye Dön</a>
+    </div>
+</div>

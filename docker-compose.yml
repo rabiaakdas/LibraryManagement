@@ -1,0 +1,37 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: librarymanagement-web
+    depends_on:
+      - sqlserver
+    restart: on-failure
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Server=sqlserver,1433;Database=LibraryManagementDb;User Id=sa;Password=YourStrong!Passw0rd2026;TrustServerCertificate=True;MultipleActiveResultSets=true
+      ConnectionStrings__MsSQLConnection: Server=sqlserver,1433;Database=LibraryManagementDb;User Id=sa;Password=YourStrong!Passw0rd2026;TrustServerCertificate=True;MultipleActiveResultSets=true
+      Jwt__Key: DockerDevelopmentJwtKey_ChangeThisValue_1234567890
+      Jwt__Issuer: LibraryManagement.Web
+      Jwt__Audience: LibraryManagement.Api
+      Jwt__ExpireMinutes: 60
+    ports:
+      - "5000:8080"
+    volumes:
+      - ./LibraryManagement.Web/Logs:/app/Logs
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: librarymanagement-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: YourStrong!Passw0rd2026
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+volumes:
+  sqlserver-data:

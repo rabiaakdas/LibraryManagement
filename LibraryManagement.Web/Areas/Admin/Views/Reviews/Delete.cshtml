@@ -1,0 +1,38 @@
+@model LibraryManagement.Web.Entity.BookReview
+
+@{
+    ViewData["Title"] = "Yorum Sil";
+}
+
+<h2 class="mb-4">Yorum Sil</h2>
+
+<div class="alert alert-warning">
+    Bu yorumu silmek istediginize emin misiniz?
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Kitap</dt>
+            <dd class="col-sm-9">@Model.Book.Title</dd>
+
+            <dt class="col-sm-3">Kullanıcı</dt>
+            <dd class="col-sm-9">@Model.User.Username (@Model.User.Email)</dd>
+
+            <dt class="col-sm-3">Puan</dt>
+            <dd class="col-sm-9">@Model.Rating / 5</dd>
+
+            <dt class="col-sm-3">Yorum</dt>
+            <dd class="col-sm-9">@Model.Comment</dd>
+
+            <dt class="col-sm-3">Tarih</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-flex gap-2">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Evet, Sil</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+</form>

@@ -1,0 +1,105 @@
+﻿@model List<OrderViewModel>
+
+<h2>Siparişlerim</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Henüz hiç sipariş vermediniz.</div>
+}
+else
+{
+    @foreach (var order in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Sipariş #@order.Id</strong> - @order.OrderDate.ToString("dd.MM.yyyy HH:mm")
+                <span class="badge bg-secondary ms-2">@order.Status</span>
+                <span class="float-end">Genel Toplam: @order.GrandTotal.ToString("C")</span>
+            </div>
+            <div class="card-body">
+                <div class="mb-3 text-end">
+                    <a asp-controller="Cart" asp-action="Invoice" asp-route-orderId="@order.Id" class="btn btn-outline-primary btn-sm">
+                        PDF Fatura İndir
+                    </a>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>Teslimat Adresi:</strong><br />
+                        @if (string.IsNullOrWhiteSpace(order.AddressDetail))
+                        {
+                            <span class="text-muted">Adres bilgisi yok</span>
+                        }
+                        else
+                        {
+                            <span>@order.AddressTitle</span><br />
+                            <small>@order.AddressDetail</small>
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Ödeme Yöntemi:</strong> @(string.IsNullOrWhiteSpace(order.PaymentMethod) ? "-" : order.PaymentMethod)<br />
+                        <strong>Kupon:</strong> @(string.IsNullOrWhiteSpace(order.CouponCode) ? "-" : order.CouponCode)<br />
+                        <strong>Ara Toplam:</strong> @order.TotalAmount.ToString("C")<br />
+                        <strong>Kargo:</strong> @(order.ShippingFee == 0 ? "Ücretsiz" : order.ShippingFee.ToString("C"))<br />
+                        <strong>İndirim:</strong> @(order.DiscountAmount == 0 ? "-" : "-" + order.DiscountAmount.ToString("C"))<br />
+                        <strong>Genel Toplam:</strong> @order.GrandTotal.ToString("C")
+                    </div>
+                </div>
+
+                <div class="border rounded p-3 mb-3">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Kargo Şirketi:</strong> @(string.IsNullOrWhiteSpace(order.CargoCompany) ? "-" : order.CargoCompany)<br />
+                            <strong>Takip Numarası:</strong> @(string.IsNullOrWhiteSpace(order.TrackingNumber) ? "-" : order.TrackingNumber)
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Kargoya Verildi:</strong> @(order.ShippedAt?.ToString("dd.MM.yyyy HH:mm") ?? "-")<br />
+                            <strong>Teslim Edildi:</strong> @(order.DeliveredAt?.ToString("dd.MM.yyyy HH:mm") ?? "-")
+                        </div>
+                    </div>
+                    @{
+                        var steps = new[] { "Sipariş Alındı", "Hazırlanıyor", "Kargoya Verildi", "Teslim Edildi" };
+                        var activeStep = order.Status switch
+                        {
+                            "Preparing" => 1,
+                            "Shipped" => 2,
+                            "Delivered" => 3,
+                            _ => 0
+                        };
+                    }
+                    <div class="row text-center g-2">
+                        @for (var i = 0; i < steps.Length; i++)
+                        {
+                            var stepClass = i <= activeStep ? "bg-success text-white" : "bg-light text-muted";
+                            <div class="col-6 col-md-3">
+                                <div class="rounded py-2 px-2 @stepClass">@steps[i]</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Kitap</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.Items)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@item.TotalPrice.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}

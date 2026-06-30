@@ -1,0 +1,50 @@
+@model LibraryManagement.Web.Entity.Book
+
+@{
+    ViewData["Title"] = "Kitap Detay";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Kitap Detay</h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">Listeye Dön</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <img src="/img/@Model.ImageUrl" alt="@Model.Title" class="img-fluid rounded" style="max-height:280px;object-fit:cover;" />
+            </div>
+            <div class="col-md-9">
+                <dl class="row mb-0">
+                    <dt class="col-sm-3">Id</dt>
+                    <dd class="col-sm-9">@Model.BookId</dd>
+
+                    <dt class="col-sm-3">Kitap Adı</dt>
+                    <dd class="col-sm-9">@Model.Title</dd>
+
+                    <dt class="col-sm-3">Yazar</dt>
+                    <dd class="col-sm-9">@Model.Author</dd>
+
+                    <dt class="col-sm-3">Fiyat</dt>
+                    <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Stok</dt>
+                    <dd class="col-sm-9">@Model.Stock</dd>
+
+                    <dt class="col-sm-3">Sayfa</dt>
+                    <dd class="col-sm-9">@Model.PageCount</dd>
+
+                    <dt class="col-sm-3">Kategoriler</dt>
+                    <dd class="col-sm-9">
+                        @(Model.Genres.Any() ? string.Join(", ", Model.Genres.Select(g => g.Name)) : "Kategori yok")
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.BookId" class="btn btn-warning">Düzenle</a>
+        <a asp-action="Delete" asp-route-id="@Model.BookId" class="btn btn-outline-danger">Sil</a>
+    </div>
+</div>

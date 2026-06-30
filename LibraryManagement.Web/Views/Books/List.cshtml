@@ -1,0 +1,27 @@
+﻿@model BooksViewModel
+
+<h1>Kitap Listesi</h1>
+
+<div id="filmler">
+    @if (Model.Books.Count > 0)
+    {
+        @foreach (var movie in Model.Books)
+        {
+            @await Html.PartialAsync("_book", movie)
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            kitap bulunamadı.
+        </div>
+    }
+</div>
+
+
+@section menu
+{
+
+    @await Component.InvokeAsync("Genres")
+}
+
