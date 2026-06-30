@@ -1,4 +1,4 @@
-# LibraryManagement.Web
+# LibraryManagement
 
 ![LibraryManagement CI](https://github.com/USERNAME/REPOSITORY/actions/workflows/ci.yml/badge.svg)
 
