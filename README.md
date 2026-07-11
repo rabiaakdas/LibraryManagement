@@ -1,141 +1,175 @@
 # LibraryManagement
 
-![LibraryManagement CI](https://github.com/USERNAME/REPOSITORY/actions/workflows/ci.yml/badge.svg)
+ASP.NET Core MVC ile geliştirilmiş, kitap kataloglama, kullanıcı işlemleri, sepet, sipariş, admin yönetimi, REST API, raporlama ve test katmanlarını içeren kütüphane yönetim uygulaması.
 
-ASP.NET Core MVC ile geliştirilmiş bu proje, kitap satış ve kütüphane yönetimi senaryosunu modelleyen katmanlı bir web uygulamasıdır. Kullanıcı tarafında kitap listeleme, filtreleme, sepet, sipariş, favori, yorum, kupon ve PDF fatura akışları; admin tarafında kitap, kategori, sipariş, kupon, yorum ve rapor yönetimi; ayrıca REST API ve Swagger desteği içerir.
+---
 
-Proje, junior .NET geliştirici portföyü için MVC, Entity Framework Core, katmanlı mimari, temel REST API, kimlik doğrulama, yetkilendirme ve birim test konularını gösterecek şekilde hazırlanmıştır.
+# Genel Bakış
 
-## Öne Çıkan Özellikler
+LibraryManagement, kitapların kategori bazlı listelenebildiği, kullanıcıların sepet ve sipariş akışı üzerinden işlem yapabildiği bir ASP.NET Core MVC projesidir. Uygulama; kullanıcı kayıt/giriş işlemleri, profil, adres yönetimi, favoriler, kitap yorumları, kupon kullanımı, sipariş oluşturma ve PDF fatura indirme gibi temel kullanıcı senaryolarını içerir.
 
-- Kullanıcı kayıt, giriş, çıkış ve şifre değiştirme
-- Google giriş altyapısı; placeholder ayarlarda sağlayıcı devre dışı kalır
-- `Admin` ve `User` rolleriyle rol tabanlı yetkilendirme
-- Kitap listeleme, detay sayfası ve gelişmiş filtreleme
-- Kitap adı ve yazar üzerinden arama
-- Kategori, fiyat, stok ve sıralama filtreleri
-- Sayfalama desteği
-- Sepete ekleme, kupon uygulama ve checkout akışı
-- Kullanıcı sipariş geçmişi
-- PDF fatura indirme
-- Favori kitaplar
-- Kitap yorumları ve 1-5 yıldız puanlama
-- Aynı kullanıcının aynı kitaba yalnızca bir kez yorum yapabilmesi
-- Admin dashboard
-- Admin kitap CRUD işlemleri
-- Admin kategori CRUD işlemleri
-- Admin sipariş listeleme, detay görüntüleme, durum ve kargo takip güncelleme
-- Admin kupon yönetimi
-- Admin yorum listeleme, filtreleme, detay görüntüleme ve silme
-- Excel sipariş ve stok raporları
-- REST API uç noktaları
-- Swagger UI
-- JWT tabanlı API kimlik doğrulama
-- FluentValidation ile form ve API doğrulamaları
-- Serilog ile loglama ve global hata yönetimi
-- Docker Compose desteği
-- GitHub Actions CI
-- xUnit ve Moq ile servis katmanı birim testleri
+Admin alanı; kitap, kategori, sipariş, yorum ve kupon yönetimi için ayrı bir MVC area olarak yapılandırılmıştır. Admin kullanıcılar dashboard ekranına erişebilir, sipariş durumlarını güncelleyebilir, PDF fatura indirebilir ve sipariş/stok raporlarını Excel dosyası olarak dışa aktarabilir.
 
-## Kullanılan Teknolojiler
+Proje tek solution altında bir web projesi ve bir test projesinden oluşur. Web projesinde Controller, Service, Repository, Entity, Validator, DTO/ViewModel, Middleware ve Mapping katmanları ayrılmıştır. REST API tarafında Swagger, JWT tabanlı admin yetkilendirmesi ve DTO dönüşümleri kullanılır.
 
-- .NET 8
-- ASP.NET Core MVC
-- ASP.NET Core Web API
-- Entity Framework Core
-- SQL Server / LocalDB
-- Cookie Authentication
-- Google Authentication
-- JWT Bearer Authentication
-- Role Based Authorization
-- Bootstrap
-- Swagger / Swashbuckle
-- FluentValidation
-- AutoMapper
-- Serilog
-- QuestPDF
-- ClosedXML
-- xUnit
-- Moq
-- BCrypt.Net-Next
+---
 
-## Katmanlı Mimari
+# Öne Çıkan Mimari Özellikler
 
-Projede controller sınıfları doğrudan `BookContext` kullanmaz. Uygulama akışı aşağıdaki yapı üzerinden ilerler:
+* ASP.NET Core MVC ve Area tabanlı admin paneli
+* Controller, Service ve Repository katmanları
+* Repository Pattern
+* Dependency Injection
+* Entity Framework Core ve SQL Server
+* EF Core Migration ve uygulama başlangıcında seed/migration akışı
+* FluentValidation ile form ve API doğrulama
+* AutoMapper ile Entity-DTO dönüşümleri
+* Cookie Authentication
+* JWT Bearer Authentication
+* Google Authentication yapılandırması
+* Rol bazlı yetkilendirme
+* Swagger/OpenAPI
+* Serilog ile console ve dosya loglama
+* Global exception middleware
+* Session tabanlı sepet yönetimi
+* QuestPDF ile PDF fatura üretimi
+* ClosedXML ile Excel rapor üretimi
+* Docker ve Docker Compose
+* GitHub Actions CI
+* xUnit ve Moq ile servis testleri
+
+---
+
+# Teknolojiler
+
+| Alan | Teknoloji |
+| --- | --- |
+| Backend | ASP.NET Core MVC, C#, .NET 8 |
+| Web UI | Razor Views, MVC Controllers, ViewComponent, static assets |
+| ORM | Entity Framework Core 8 |
+| Veritabanı | SQL Server / LocalDB |
+| Authentication | Cookie Authentication, JWT Bearer, Google Authentication |
+| Authorization | Role-based Authorization, `Admin` ve `User` rolleri |
+| Validation | FluentValidation |
+| Logging | Serilog, Console sink, File sink |
+| Mapping | AutoMapper |
+| API | ASP.NET Core API Controllers, Swagger / Swashbuckle |
+| Testing | xUnit, Moq, Microsoft.NET.Test.Sdk, coverlet.collector |
+| Container | Docker, Docker Compose, SQL Server 2022 container |
+
+---
+
+# Proje Yapısı
 
 ```text
-Controller
-  -> Service
-    -> Repository
-      -> BookContext
+LibraryManagement.sln                 Solution dosyası
+
+├── LibraryManagement.Web/             ASP.NET Core MVC ve API projesi
+│   ├── Areas/                         Admin area yapısı, admin controller ve view dosyaları
+│   ├── Controllers/                   MVC controller ve API controller sınıfları
+│   ├── Data/                          BookContext, DbContext factory ve seed işlemleri
+│   ├── Entity/                        Veritabanı entity sınıfları
+│   ├── Extensions/                    Session için yardımcı extension metotları
+│   ├── Mappings/                      AutoMapper profil tanımları
+│   ├── Middleware/                    Global hata yönetimi middleware sınıfı
+│   ├── Migrations/                    EF Core migration dosyaları
+│   ├── Models/                        ViewModel, DTO ve ayar modelleri
+│   ├── Repositories/                  Repository interface ve implementasyonları
+│   ├── Services/                      İş kuralları ve servis interface/implementasyonları
+│   ├── Validators/                    FluentValidation doğrulama sınıfları
+│   ├── ViewComponent/                 Genre listeleme ViewComponent yapısı
+│   ├── Views/                         Razor view dosyaları
+│   ├── wwwroot/                       CSS, JavaScript, görsel ve client asset dosyaları
+│   ├── Program.cs                     Uygulama servisleri, middleware ve route yapılandırması
+│   └── appsettings.json               Uygulama yapılandırması
+│
+├── LibraryManagement.Tests/           Unit test projesi
+│   ├── Helpers/                       Test yardımcı sınıfları
+│   └── Services/                      Servis katmanı testleri
+│
+├── Dockerfile                         Web uygulaması için çok aşamalı Docker build dosyası
+├── docker-compose.yml                 Web ve SQL Server servislerini çalıştıran compose dosyası
+└── .github/workflows/ci.yml           GitHub Actions build ve test workflow dosyası
 ```
 
-- `Controllers`: MVC ve API istek/yanıt akışını yönetir.
-- `Areas/Admin`: Admin panel controller ve view yapısını içerir.
-- `Services`: İş kurallarını ve uygulama mantığını içerir.
-- `Repositories`: EF Core sorgularını ve veri erişimini içerir.
-- `Data/BookContext.cs`: EF Core DbContext yapısıdır.
-- `Entity`: Veritabanı entity sınıflarını içerir.
-- `Models` ve `Areas/Admin/Models`: ViewModel ve DTO yapılarını içerir.
-- `LibraryManagement.Tests`: Servis katmanı birim testlerini içerir.
+---
 
-## Veritabanı Yapısı
+# Bağımlılık Akışı
 
-Temel tablolar:
+```text
+HTTP Request
 
-- `Books`: Kitap bilgileri
-- `Genres`: Kategori bilgileri
-- `Users`: Kullanıcı bilgileri ve rol alanı
-- `Orders`: Sipariş genel bilgileri ve durum bilgisi
-- `OrderItems`: Sipariş ürünleri
-- `Favorites`: Kullanıcı favorileri
-- `Addresses`: Kullanıcı adresleri
-- `BookReviews`: Kitap yorumları ve puanları
-- `BookSuggestions`: Kitap önerileri
+↓
 
-İlişkiler:
+MVC Controller / API Controller
 
-- `Book` - `Genre`: Many-to-many
-- `Order` - `OrderItem`: One-to-many
-- `Book` - `BookReview`: One-to-many
-- `User` - `BookReview`: One-to-many
-- `User` - `Favorite`: One-to-many
-- `User` - `Address`: One-to-many
+↓
 
-## Kurulum Adımları
+Service
 
-1. Repository'yi klonlayın.
+↓
+
+Repository
+
+↓
+
+BookContext
+
+↓
+
+Entity Framework Core
+
+↓
+
+SQL Server
+```
+
+Admin panel, kullanıcı arayüzü ve API katmanları aynı servis ve repository bağımlılıklarını kullanır. Sepet işlemleri session üzerinde tutulur; sipariş, kullanıcı, kitap, yorum, kupon ve rapor işlemleri veritabanı üzerinden yürür.
+
+---
+
+# Gereksinimler
+
+* .NET 8 SDK
+* SQL Server veya SQL Server LocalDB
+* Entity Framework Core CLI aracı
+* Docker ve Docker Compose
+* Git
+
+EF Core CLI yüklü değilse:
 
 ```bash
-git clone <repository-url>
+dotnet tool install --global dotnet-ef
+```
+
+---
+
+# Kurulum
+
+1. Depoyu klonlayın.
+
+```bash
+git clone https://github.com/rabiaakdas/LibraryManagement.git
 cd LibraryManagement
 ```
 
-2. Paketleri restore edin.
+2. NuGet paketlerini geri yükleyin.
 
 ```bash
-dotnet restore
+dotnet restore LibraryManagement.sln
 ```
 
-3. `LibraryManagement.Web/appsettings.json` içindeki connection string değerini kendi ortamınıza göre düzenleyin.
-
-Örnek LocalDB connection string:
+3. Veritabanı bağlantısını yapılandırın.
 
 ```json
-"ConnectionStrings": {
-  "MsSQLConnection": "Server=(localdb)\\MSSQLLocalDB;Database=LibraryManagementDb;Trusted_Connection=True;TrustServerCertificate=True;"
+{
+  "ConnectionStrings": {
+    "MsSQLConnection": "Server=(localdb)\\MSSQLLocalDB;Database=LibraryManagementDb;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
 }
 ```
 
-Örnek SQL Server connection string:
-
-```json
-"ConnectionStrings": {
-  "MsSQLConnection": "Server=localhost;Database=LibraryManagementDb;User Id=YOUR_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True;"
-}
-```
-
-4. Veritabanını oluşturun.
+4. Migration dosyalarını veritabanına uygulayın.
 
 ```bash
 dotnet ef database update --project LibraryManagement.Web
@@ -147,294 +181,45 @@ dotnet ef database update --project LibraryManagement.Web
 dotnet run --project LibraryManagement.Web
 ```
 
-## Migration Komutları
-
-Yeni migration oluşturmak için:
-
-```bash
-dotnet ef migrations add MigrationName --project LibraryManagement.Web
-```
-
-Veritabanını güncellemek için:
-
-```bash
-dotnet ef database update --project LibraryManagement.Web
-```
-
-Son migration'ı geri almak için:
-
-```bash
-dotnet ef migrations remove --project LibraryManagement.Web
-```
-
-## Admin Giriş Bilgileri
-
-Seed data çalıştığında admin kullanıcısı otomatik olarak oluşturulur.
+6. Uygulamayı tarayıcıda açın.
 
 ```text
-Username: admin
-Password: Admin123
-Email: admin@library.com
-Role: Admin
+http://localhost:5000
 ```
 
-Admin panel route'u:
+Uygulama başlangıcında `DataSeeding.Seed(app)` çalışır. Bu metot `context.Database.Migrate()` çağırır ve veritabanında veri yoksa kategori, kitap ve varsayılan kullanıcı kayıtlarını oluşturur.
 
-```text
-/Admin/Dashboard
-```
+---
 
-> Not: Canlı ortamda seed admin şifresi mutlaka değiştirilmelidir.
+# Docker ile Çalıştırma
 
-## Swagger Kullanımı
-
-Development ortamında Swagger UI aktiftir.
-
-```text
-/swagger
-```
-
-API GET uç noktaları herkese açıktır. Kitap ekleme, güncelleme ve silme uç noktaları yalnızca `Admin` rolüne açıktır.
-
-## Sürekli Entegrasyon
-
-GitHub Actions ile her `push` ve `pull_request` işleminde otomatik CI pipeline çalışır.
-
-Pipeline adımları:
-
-- Repository checkout
-- .NET 8 SDK kurulumu
-- `dotnet restore LibraryManagement.sln`
-- `dotnet build LibraryManagement.sln --configuration Release --no-restore`
-- `dotnet test LibraryManagement.sln --configuration Release --no-build --no-restore`
-
-Amaç, her değişiklikte projenin derlenebilir ve test edilebilir durumda kaldığını otomatik olarak doğrulamaktır.
-
-## Gelişmiş Checkout Süreci
-
-Checkout akışı daha gerçekçi bir e-ticaret deneyimi için üç bölüme ayrılmıştır:
-
-- Teslimat adresi
-- Ödeme yöntemi
-- Sipariş özeti
-
-Kullanıcı sipariş vermeden önce kayıtlı adreslerinden birini seçmelidir. Adres yoksa checkout ekranında adres ekleme bağlantısı gösterilir.
-
-Desteklenen ödeme yöntemleri:
-
-- Kapıda ödeme
-- Kredi kartı simülasyonu
-- Havale/EFT
-
-Kredi kartı simülasyonunda kart sahibi, kart numarası, son kullanma tarihi ve CVV alanları doğrulanır. Gerçek ödeme entegrasyonu yapılmaz ve kart bilgileri veritabanına kaydedilmez.
-
-Kargo hesaplama kuralı:
-
-- Sepet toplamı 500 TL altındaysa kargo 49.90 TL
-- 500 TL ve üzeri siparişlerde kargo ücretsiz
-
-Sipariş oluşturulurken ürün fiyatları veritabanından tekrar hesaplanır, stok yeniden kontrol edilir ve siparişe ara toplam, kargo ücreti, genel toplam, teslimat adresi ve ödeme yöntemi yazılır.
-
-## Kupon ve İndirim Sistemi
-
-Checkout sırasında kullanıcı kupon kodu girebilir. Geçerli kupon uygulandığında sipariş toplamından indirim düşülür.
-
-Kupon kuralları:
-
-- Kupon aktif olmalıdır.
-- Son kullanma tarihi dolmamış olmalıdır.
-- Minimum sipariş tutarı sağlanmalıdır.
-- Kullanım limiti dolmamış olmalıdır.
-- `Percentage` kuponlar yüzde indirimi uygular.
-- `FixedAmount` kuponlar sabit tutar indirimi uygular.
-- İndirim tutarı ara toplamı geçemez.
-
-Sipariş oluşturulurken kupon tekrar doğrulanır, `CouponCode` ve `DiscountAmount` siparişe yazılır ve kuponun `UsedCount` değeri artırılır. Admin panelde `Kupon Yönetimi` ekranından kuponlar listelenebilir, oluşturulabilir, düzenlenebilir ve pasifleştirilebilir.
-
-## Kargo Takip Sistemi
-
-Admin sipariş yönetiminde siparişe kargo şirketi ve takip numarası girilebilir. Sipariş durumu `Shipped` yapıldığında `ShippedAt`, `Delivered` yapıldığında `DeliveredAt` otomatik olarak atanır.
-
-Kullanıcı sipariş geçmişinde şu kargo bilgilerini görebilir:
-
-- Kargo şirketi
-- Takip numarası
-- Kargoya verildi tarihi
-- Teslim edildi tarihi
-
-Sipariş geçmişinde basit takip adımları gösterilir:
-
-- Sipariş alındı
-- Hazırlanıyor
-- Kargoya verildi
-- Teslim edildi
-
-Aktif adım sipariş durumuna göre renklendirilir. Kargo bilgisi güncellendiğinde, sipariş kargoya verildiğinde ve teslim edildiğinde Serilog ile bilgi logu yazılır.
-
-## E-posta Bildirim Sistemi
-
-Sipariş oluşturulduğunda ve admin sipariş durumunu değiştirdiğinde kullanıcıya e-posta bildirimi gönderilecek şekilde altyapı eklenmiştir.
-
-Development ortamında varsayılan olarak fake email sender kullanılır:
-
-```json
-"EmailSettings": {
-  "UseFakeEmailSender": true
-}
-```
-
-Bu modda gerçek e-posta gönderilmez; gönderilecek içerik Serilog/ILogger üzerinden loglanır. SMTP ile gerçek gönderim yapılmak istenirse `UseFakeEmailSender` değeri `false` yapılır ve SMTP ayarları environment variable veya user secrets üzerinden verilmelidir.
-
-Örnek environment variable adları:
-
-```text
-EmailSettings__Host
-EmailSettings__Port
-EmailSettings__UserName
-EmailSettings__Password
-EmailSettings__FromEmail
-EmailSettings__FromName
-EmailSettings__EnableSsl
-EmailSettings__UseFakeEmailSender
-```
-
-SMTP kullanıcı adı, parola ve gerçek sunucu bilgileri GitHub'a eklenmemelidir. `appsettings.json` içinde yalnızca örnek değerler tutulur.
-
-## Excel Raporlama
-
-Admin kullanıcılar sipariş ve stok bilgilerini Excel formatında dışa aktarabilir.
-
-Uç noktalar:
-
-- `GET /Admin/Reports/OrdersExcel`
-- `GET /Admin/Reports/StockExcel`
-
-Rapor dosya adları tarih bazlı oluşturulur:
-
-- `orders-report-yyyyMMdd.xlsx`
-- `stock-report-yyyyMMdd.xlsx`
-
-Excel üretimi için `ClosedXML` kullanılır. Başlık satırları kalın biçimlendirilir, kolon genişlikleri otomatik ayarlanır ve para alanları TL formatına uygun yazılır.
-
-Rapor indirme ve rapor oluşturma hataları Serilog ile loglanır.
-
-## Stok Uyarı Sistemi
-
-Admin panelde stok seviyesi düşük kitaplar daha görünür hale getirilmiştir. Stok kuralları:
-
-- `InStock`: Stok 5'in üzerinde
-- `LowStock`: Stok 1-5 arasında
-- `OutOfStock`: Stok 0 veya daha az
-
-Admin Dashboard düşük stok bölümünde `Düşük Stok` ve `Stok Yok` badge'leri gösterilir. Admin kitap listesinde stok durumu badge olarak görünür ve stok filtresi ile `Tümü`, `Stokta olanlar`, `Düşük stok`, `Stokta olmayanlar` seçenekleri kullanılabilir.
-
-Kullanıcı tarafında stokta olmayan kitaplarda `Sepete Ekle` butonu pasif hale gelir ve `Stokta Yok` mesajı gösterilir. Checkout sırasında stok tekrar kontrol edilir; stok yetersizse hangi kitapta sorun olduğu açık mesajla kullanıcıya bildirilir.
-
-Sipariş sonrası kitap stoku 0'a düşerse veya düşük stok seviyesine inerse Serilog ile log yazılır.
-
-## Google Giriş
-
-Web arayüzünde kullanıcılar Google hesabı ile giriş yapabilecek şekilde harici giriş altyapısı eklenmiştir. Mevcut kullanıcı adı/şifre ile giriş, MVC cookie authentication, JWT API login ve admin panel akışı korunur.
-
-Google giriş kullanmak için Google Cloud Console üzerinden OAuth Client oluşturulmalıdır:
-
-1. Google Cloud Console'da proje oluşturun veya mevcut projeyi seçin.
-2. OAuth consent screen ayarlarını tamamlayın.
-3. Credentials bölümünden `OAuth client ID` oluşturun.
-4. Application type olarak `Web application` seçin.
-5. Authorized redirect URI alanına şu adresi ekleyin:
-
-```text
-http://localhost:5000/signin-google
-```
-
-Gerçek `ClientId` ve `ClientSecret` değerleri `appsettings.json` içine yazılmamalıdır. Geliştirme ortamında `appsettings.Development.json`, user secrets veya environment variable kullanılabilir.
-
-Örnek environment variable adları:
-
-```text
-Authentication__Google__ClientId=your-google-client-id
-Authentication__Google__ClientSecret=your-google-client-secret
-```
-
-`appsettings.json` içinde yalnızca placeholder değerler bulunur. Bu değerler değiştirilmediyse Google giriş sağlayıcısı aktif edilmez ve login ekranında Google butonu gösterilmez.
-
-## PDF Fatura Sistemi
-
-Kullanıcılar kendi sipariş detayları için PDF fatura indirebilir. Admin kullanıcılar da admin sipariş detay ekranından aynı faturayı indirebilir.
-
-PDF üretimi için `QuestPDF` paketi kullanılır. Bu projede portföy/geliştirme amacıyla Community lisans ayarı yapılmıştır. Oluşturulan belge resmi e-fatura entegrasyonu değildir; proje içi örnek fatura çıktısıdır.
-
-Fatura içeriğinde şunlar yer alır:
-
-- Sipariş numarası ve tarihi
-- Kullanıcı bilgisi
-- Teslimat adresi
-- Ödeme yöntemi ve sipariş durumu
-- Varsa kargo şirketi ve takip numarası
-- Ürün listesi, adet, birim fiyat ve toplam fiyat
-- Ara toplam, kargo ücreti, kupon kodu, indirim ve genel toplam
-
-Uç noktalar:
-
-- Kullanıcı: `GET /Cart/Invoice/{orderId}`
-- Admin: `GET /Admin/Orders/Invoice/{orderId}`
-
-Kullanıcı sadece kendi siparişinin faturasını indirebilir. Yetkisiz fatura erişim denemeleri ve fatura oluşturma hataları Serilog ile loglanır.
-
-## Docker ile Çalıştırma
-
-Proje Docker Compose ile web uygulaması ve SQL Server container'ı birlikte çalışacak şekilde hazırlanmıştır.
+Projede `Dockerfile` ve `docker-compose.yml` bulunur. Compose dosyası web uygulamasını ve SQL Server 2022 container'ını birlikte ayağa kaldırır.
 
 ```bash
 docker compose up --build
 ```
 
-Çalışma adresleri:
+| Servis | Açıklama |
+| --- | --- |
+| `web` | `LibraryManagement.Web` uygulamasını .NET 8 runtime üzerinde çalıştırır |
+| `sqlserver` | SQL Server 2022 Developer container'ı |
+
+Docker ile varsayılan erişim adresi:
 
 ```text
-Web:     http://localhost:5000
-Swagger: http://localhost:5000/swagger
+http://localhost:5000
 ```
 
-Compose servisleri:
+Compose dosyasında örnek geliştirme değerleri bulunur. Gerçek ortamda SQL Server parolası ve JWT anahtarı environment variable veya secret yönetimiyle değiştirilmelidir.
 
-- `web`: ASP.NET Core MVC/API uygulaması
-- `sqlserver`: SQL Server 2022 container
+---
 
-Docker ortamında connection string environment variable olarak verilir:
+# Testleri Çalıştırma
 
-```text
-ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=LibraryManagementDb;User Id=sa;Password=YourStrong!Passw0rd2026;TrustServerCertificate=True;MultipleActiveResultSets=true
-```
-
-Geriye uyumluluk için compose dosyasında `ConnectionStrings__MsSQLConnection` da aynı değere ayarlanmıştır.
-
-Migration konusu:
-
-- Uygulama başlarken `DataSeeding.Seed(app)` içinde `Database.Migrate()` çalışır.
-- Bu nedenle container ilk açılışta migration'ları SQL Server container'a uygular.
-- SQL Server ilk açılışta hazır olana kadar web container yeniden başlayabilir; `restart: on-failure` bunun için eklenmiştir.
-
-Dikkat edilmesi gerekenler:
-
-- `SA_PASSWORD` örnek geliştirme parolasıdır, gerçek ortamda değiştirilmelidir.
-- `Jwt__Key` örnek geliştirme secret'ıdır, gerçek ortamda güvenli secret kullanılmalıdır.
-- Serilog dosya logları container içinde `/app/Logs` altına yazılır ve host tarafında `LibraryManagement.Web/Logs` klasörüne map edilir.
-- `Logs/` klasörü GitHub'a eklenmez.
-
-## Test Komutları
-
-Tüm solution'ı build etmek için:
+Tüm testleri solution üzerinden çalıştırmak için:
 
 ```bash
-dotnet build
-```
-
-Testleri çalıştırmak için:
-
-```bash
-dotnet test
+dotnet test LibraryManagement.sln --configuration Release
 ```
 
 Sadece test projesini çalıştırmak için:
@@ -443,105 +228,310 @@ Sadece test projesini çalıştırmak için:
 dotnet test LibraryManagement.Tests/LibraryManagement.Tests.csproj
 ```
 
-## API Uç Noktaları
+`LibraryManagement.Tests` projesi `LibraryManagement.Web` projesine referans verir. Testler servis katmanına odaklanır ve mock bağımlılıklar için Moq kullanır.
 
-Books API:
+---
+
+# Varsayılan Kullanıcılar
+
+Seed işlemi veritabanında kullanıcı yoksa aşağıdaki kullanıcıları oluşturur.
+
+| Rol | Kullanıcı | E-posta | Parola |
+| --- | --- | --- | --- |
+| User | `usera` | `usera@gmail.com` | `12345` |
+| User | `userb` | `userb@gmail.com` | `12345` |
+| User | `userc` | `userc@gmail.com` | `12345` |
+| Admin | `admin` | `admin@library.com` | `Admin123` |
+
+Parolalar seed sırasında BCrypt ile hashlenerek kaydedilir.
+
+---
+
+# API Endpointleri
+
+| Method | Route | Açıklama | Auth |
+| --- | --- | --- | --- |
+| POST | `/api/auth/login` | Kullanıcı adı/e-posta ve parola ile JWT token üretir | Yok |
+| GET | `/api/books` | Kitap listesini döndürür | Yok |
+| GET | `/api/books/{id}` | Tek kitap bilgisini döndürür | Yok |
+| POST | `/api/books` | Yeni kitap oluşturur | JWT Bearer, Admin |
+| PUT | `/api/books/{id}` | Kitap bilgisini günceller | JWT Bearer, Admin |
+| DELETE | `/api/books/{id}` | Kitabı siler | JWT Bearer, Admin |
+| GET | `/api/genres` | Kategori listesini döndürür | Yok |
+| GET | `/api/genres/{id}` | Tek kategori bilgisini döndürür | Yok |
+| GET | `/api/orders` | Sipariş listesini döndürür | Yok |
+| GET | `/api/orders/{id}` | Tek sipariş bilgisini döndürür | Yok |
+
+Swagger yalnızca development ortamında aktiftir.
 
 ```text
-GET    /api/books
-GET    /api/books/{id}
-POST   /api/books        Admin
-PUT    /api/books/{id}   Admin
-DELETE /api/books/{id}   Admin
+http://localhost:5000/swagger
 ```
 
-Genres API:
+---
+
+# Kullanıcı Akışı
 
 ```text
-GET /api/genres
-GET /api/genres/{id}
+Kullanıcı
+
+↓
+
+Kayıt olur veya giriş yapar
+
+↓
+
+Kitapları görüntüler ve filtreler
+
+↓
+
+Kitap detayını inceler
+
+↓
+
+Favorilere ekler veya yorum yapar
+
+↓
+
+Sepete kitap ekler
+
+↓
+
+Adres ve ödeme bilgisiyle sipariş oluşturur
+
+↓
+
+Siparişlerini görüntüler
+
+↓
+
+PDF fatura indirir
 ```
 
-Orders API:
+---
+
+# Admin Akışı
 
 ```text
-GET /api/orders
-GET /api/orders/{id}
+Admin
+
+↓
+
+Dashboard
+
+↓
+
+Kitap Yönetimi
+
+↓
+
+Kategori Yönetimi
+
+↓
+
+Sipariş Yönetimi
+
+↓
+
+Yorum Yönetimi
+
+↓
+
+Kupon Yönetimi
+
+↓
+
+Excel Raporları
 ```
 
-## JWT API Kimlik Doğrulama
+---
 
-MVC tarafındaki cookie tabanlı giriş sistemi korunur. REST API tarafında token almak için ayrı uç nokta kullanılır.
+# Veritabanı
 
-### API Girişi
+| Entity | Açıklama |
+| --- | --- |
+| `Book` | Kitap adı, yazar, görsel, sayfa sayısı, fiyat, stok, kategori ve yorum ilişkilerini tutar |
+| `Genre` | Kitap kategorilerini tutar; kitaplarla çoktan çoğa ilişkilidir |
+| `User` | Kullanıcı adı, e-posta, parola, rol ve harici giriş sağlayıcı bilgilerini tutar |
+| `BookReview` | Kitap yorumlarını, puanları ve kullanıcı-kitap ilişkisini tutar |
+| `BookSuggestion` | Kullanıcı kitap önerilerini ve beğeni sayısını tutar |
+| `Favorite` | Kullanıcı ile favori kitap ilişkisini tutar |
+| `Address` | Kullanıcı adres bilgilerini tutar |
+| `Order` | Sipariş tarihi, tutar, durum, adres, ödeme, kupon, kargo ve takip bilgilerini tutar |
+| `OrderItem` | Sipariş içindeki kitap kalemlerini, adet ve fiyat bilgilerini tutar |
+| `Coupon` | Kupon kodu, indirim tipi, indirim değeri, minimum tutar, kullanım limiti ve aktiflik bilgisini tutar |
 
-```http
-POST /api/auth/login
-Content-Type: application/json
+`BookContext` içinde yapılandırılan temel ilişkiler:
+
+```text
+Book - Genre             many-to-many
+Book - BookReview        one-to-many
+User - BookReview        one-to-many
+Order - OrderItem        one-to-many
+Order - Address          optional one-to-one/one-to-many kullanım
+Favorite - Book          many-to-one
 ```
 
-Örnek istek:
+---
+
+# Test Kapsamı
+
+| Test Sınıfı | Açıklama |
+| --- | --- |
+| `BookServiceTests` | Kitap listeleme, detay, stok ve API kitap işlemleri için servis davranışlarını test eder |
+| `CouponServiceTests` | Kupon doğrulama, indirim ve kullanım kurallarını test eder |
+| `EmailServiceTests` | Fake e-posta gönderim davranışını test eder |
+| `ExportServiceTests` | Sipariş ve stok Excel raporu üretimini test eder |
+| `GenreServiceTests` | Kategori servis işlemlerini test eder |
+| `InvoiceServiceTests` | PDF fatura üretimi ve erişim kontrollerini test eder |
+| `OrderServiceTests` | Sipariş oluşturma, kargo, durum ve dashboard işlemlerini test eder |
+| `ReviewServiceTests` | Kitap yorum ekleme ve yorum yönetimi davranışlarını test eder |
+| `UserServiceTests` | Kullanıcı giriş, API login, e-posta/kullanıcı adı kontrolü ve harici kullanıcı oluşturmayı test eder |
+
+---
+
+# Konfigürasyon
+
+Gerçek secret, parola ve bağlantı bilgileri repoya yazılmamalıdır. Aşağıdaki örnek yalnızca gerekli yapılandırma alanlarını gösterir.
+
+| Alan | Açıklama |
+| --- | --- |
+| `ConnectionStrings:MsSQLConnection` | SQL Server bağlantısı |
+| `Jwt:Key` | JWT imzalama anahtarı |
+| `Jwt:Issuer` | Token issuer bilgisi |
+| `Jwt:Audience` | Token audience bilgisi |
+| `Jwt:ExpireMinutes` | Token geçerlilik süresi |
+| `Authentication:Google` | Google OAuth istemci bilgileri |
+| `EmailSettings` | SMTP veya fake email sender ayarları |
+| `Serilog` | Console ve dosya loglama ayarları |
 
 ```json
 {
-  "userNameOrEmail": "admin@library.com",
-  "password": "Admin123"
+  "ConnectionStrings": {
+    "MsSQLConnection": "YOUR_SQL_SERVER_CONNECTION_STRING"
+  },
+  "Jwt": {
+    "Key": "YOUR_STRONG_JWT_KEY",
+    "Issuer": "LibraryManagement.Web",
+    "Audience": "LibraryManagement.Api",
+    "ExpireMinutes": 60
+  },
+  "Authentication": {
+    "Google": {
+      "ClientId": "YOUR_GOOGLE_CLIENT_ID",
+      "ClientSecret": "YOUR_GOOGLE_CLIENT_SECRET"
+    }
+  },
+  "EmailSettings": {
+    "Host": "YOUR_SMTP_HOST",
+    "Port": 587,
+    "UserName": "YOUR_SMTP_USERNAME",
+    "Password": "YOUR_SMTP_PASSWORD",
+    "FromEmail": "YOUR_FROM_EMAIL",
+    "FromName": "LibraryManagement",
+    "EnableSsl": true,
+    "UseFakeEmailSender": true
+  }
 }
 ```
 
-Başarılı yanıtta `token`, `expiration`, `userName`, `email` ve `role` alanları döner.
+Development ortamında `appsettings.Development.json` yalnızca logging seviyelerini içerir. Yerel çalışma profili `LibraryManagement.Web/Properties/launchSettings.json` içinde `http://localhost:5000` olarak tanımlıdır.
 
-### Swagger Yetkilendirme
+---
 
-1. Uygulamayı çalıştırın ve Swagger UI sayfasını açın.
-2. `POST /api/auth/login` uç noktası ile token alın.
-3. Swagger'daki `Authorize` butonuna tıklayın.
-4. Token değerini `Bearer {token}` formatında girin.
-5. Admin rolü isteyen `POST`, `PUT` ve `DELETE /api/books` uç noktalarını test edin.
+# Kullanılan NuGet Paketleri
 
-> Not: `appsettings.json` içindeki `Jwt:Key` örnek geliştirme değeridir. Gerçek ortamda güvenli bir secret ile değiştirilmelidir.
+## LibraryManagement.Web
 
-## FluentValidation
+| Paket | Amaç |
+| --- | --- |
+| `BCrypt.Net-Next` | Seed ve harici kullanıcı parolaları için BCrypt hash/doğrulama desteği |
+| `ClosedXML` | Excel raporu üretimi |
+| `FluentValidation.AspNetCore` | MVC ve API model doğrulama |
+| `AutoMapper.Extensions.Microsoft.DependencyInjection` | AutoMapper servis kaydı ve DTO mapping |
+| `Microsoft.AspNetCore.Authentication.Google` | Google Authentication |
+| `Microsoft.AspNetCore.Authentication.JwtBearer` | JWT Bearer Authentication |
+| `Microsoft.EntityFrameworkCore.Design` | EF Core design-time işlemleri |
+| `Microsoft.EntityFrameworkCore.SqlServer` | SQL Server EF Core provider |
+| `Microsoft.EntityFrameworkCore.Tools` | Migration ve EF araçları |
+| `Newtonsoft.Json` | Session object serialize/deserialize işlemleri |
+| `QuestPDF` | PDF fatura üretimi |
+| `Serilog.AspNetCore` | ASP.NET Core Serilog entegrasyonu |
+| `Serilog.Sinks.Console` | Console log çıktısı |
+| `Serilog.Sinks.File` | Dosya log çıktısı |
+| `Swashbuckle.AspNetCore` | Swagger/OpenAPI dokümantasyonu |
 
-Projede MVC formları ve REST API istekleri için FluentValidation kullanılır. Doğrulama kuralları `LibraryManagement.Web/Validators` klasöründe tutulur ve `Program.cs` içinde otomatik validation olarak kaydedilir.
+## LibraryManagement.Tests
 
-Oluşturulan temel validatorlar:
+| Paket | Amaç |
+| --- | --- |
+| `coverlet.collector` | Test coverage toplama altyapısı |
+| `Microsoft.NET.Test.Sdk` | .NET test çalıştırma altyapısı |
+| `Moq` | Mock nesne oluşturma |
+| `xunit` | Unit test framework |
+| `xunit.runner.visualstudio` | Visual Studio ve `dotnet test` runner entegrasyonu |
 
-- `BookValidator`
-- `GenreValidator`
-- `OrderValidator`
-- `ReviewValidator`
-- `UserLoginValidator`
-- `UserRegisterValidator`
+---
 
-MVC tarafında validation mesajları mevcut `asp-validation-for` alanlarında görünmeye devam eder. API tarafında model doğrulama başarısız olursa `[ApiController]` davranışıyla otomatik `400 BadRequest` döner.
+# Loglama
 
-## Serilog Loglama
+Projede Serilog yapılandırılmıştır. `Program.cs` içinde `builder.Host.UseSerilog(...)` ile aktif edilir ve `app.UseSerilogRequestLogging()` middleware pipeline'a eklenir.
 
-Projede uygulama hatalarını ve önemli iş olaylarını merkezi olarak takip etmek için Serilog kullanılır.
+| Hedef | Açıklama |
+| --- | --- |
+| Console | Geliştirme sırasında logların terminalde izlenmesi |
+| File | `LibraryManagement.Web/Logs/logs-.txt` dosya desenine günlük log yazımı |
 
-- Console logları geliştirme sırasında anlık takip için kullanılır.
-- File sink ile loglar `LibraryManagement.Web/Logs/` klasörüne günlük dosyalar halinde yazılır.
-- Dosya formatı `logs-.txt` rolling file yapısındadır.
-- Varsayılan minimum seviye `Information`, `Microsoft` ve `System` logları `Warning` seviyesindedir.
-- GlobalExceptionMiddleware içindeki mevcut `ILogger` kullanımı Serilog pipeline'ı üzerinden çalışır.
+`appsettings.json` içinde dosya logları için `rollingInterval: Day` ve `retainedFileCountLimit: 14` tanımlıdır. Email, rapor, fatura ve kullanıcı giriş işlemlerinde servisler üzerinden log kayıtları üretilir.
 
-Loglanan temel olaylar:
+---
 
-- Kullanıcı girişi başarılı
-- Kullanıcı girişi başarısız
-- Yeni sipariş oluşturuldu
-- Admin sipariş durumunu değiştirdi
-- Yorum eklendi
-- Yorum silindi
+# Kimlik Doğrulama
 
-`Logs/` klasörü `.gitignore` içindedir. Log dosyaları kullanıcı davranışları, hata detayları veya ortam bilgileri içerebileceği için GitHub'a eklenmez.
+| Yöntem | Kullanım |
+| --- | --- |
+| Cookie Authentication | MVC kullanıcı girişi ve admin panel erişimi |
+| JWT Bearer Authentication | API üzerinden admin kitap oluşturma, güncelleme ve silme işlemleri |
+| Google Authentication | Google OAuth ayarları geçerliyse harici kullanıcı girişi |
+| Role-based Authorization | Admin area ve bazı API işlemlerinde `Admin` rolü kontrolü |
 
-## Global Hata Yönetimi
+Cookie login yolu:
 
-Beklenmeyen hatalar `LibraryManagement.Web/Middleware/GlobalExceptionMiddleware.cs` içinde tek noktadan yönetilir.
+```text
+/Users/Login
+```
 
-- `/api` ile başlayan veya `Accept: application/json` isteyen isteklerde standart JSON hata cevabı döner.
-- MVC isteklerinde kullanıcı stack trace görmez, `/Home/Error` sayfasına yönlendirilir.
-- Development ortamında API hata cevabına kısa teknik `detail` alanı eklenir.
-- NotFound gibi beklenen senaryolar controller içinde uygun HTTP sonucu ile yönetilmeye devam eder.
+Cookie logout yolu:
+
+```text
+/Users/Logout
+```
+
+JWT token alma endpoint'i:
+
+```text
+POST /api/auth/login
+```
+
+Google Authentication yalnızca `Authentication:Google:ClientId` ve `Authentication:Google:ClientSecret` placeholder olmayan değerlerle yapılandırıldığında eklenir.
+
+---
+
+# Hata Yönetimi
+
+Projede `GlobalExceptionMiddleware` kullanılır. Middleware, beklenmeyen hataları yakalar ve `ILogger` üzerinden loglar.
+
+| İstek Tipi | Davranış |
+| --- | --- |
+| API isteği | JSON hata cevabı döndürür |
+| JSON kabul eden istek | JSON hata cevabı döndürür |
+| MVC isteği | `/Home/Error` sayfasına yönlendirir |
+| Development ortamı | API hata cevabına exception mesajını `detail` alanı olarak ekler |
+
+Middleware `Program.cs` içinde route ve authentication işlemlerinden önce pipeline'a eklenmiştir.
+
+---
+
+# Lisans
+
+Bu proje MIT lisansı ile lisanslanmıştır. Ayrıntılar için `LICENSE` dosyasını inceleyebilirsiniz.
