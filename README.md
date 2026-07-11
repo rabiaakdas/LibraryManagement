@@ -469,39 +469,6 @@ GET /api/orders
 GET /api/orders/{id}
 ```
 
-## Ekran Görüntüsü Alanları
-
-GitHub README için aşağıdaki ekran görüntüleri eklenebilir:
-
-```text
-docs/screenshots/home.png
-docs/screenshots/books-filter.png
-docs/screenshots/book-detail-reviews.png
-docs/screenshots/cart-checkout.png
-docs/screenshots/admin-dashboard.png
-docs/screenshots/admin-books.png
-docs/screenshots/admin-orders.png
-docs/screenshots/swagger.png
-```
-
-Örnek Markdown kullanımı:
-
-```md
-![Admin Dashboard](docs/screenshots/admin-dashboard.png)
-```
-
-## Gelecekte Yapılabilecek Geliştirmeler
-
-- Admin panelde raporlama grafikleri
-- Sipariş iptal/iade akışı
-- Kullanıcı profil sayfası geliştirmeleri
-- Kitap görselleri için dosya yükleme
-- Integration testler
-
-## Lisans
-
-Bu proje MIT lisansı ile lisanslanmıştır.
-
 ## JWT API Kimlik Doğrulama
 
 MVC tarafındaki cookie tabanlı giriş sistemi korunur. REST API tarafında token almak için ayrı uç nokta kullanılır.
